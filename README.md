@@ -19,3 +19,4 @@ These use custom logic defined within your smart contract through the Automation
 Log trigger:
 These monitor blockchain events (logs) emitted by smart contracts. Chainlink Automation executes the associated function when a specified event occurs, allowing for event-driven automation
 
+<img width="2538" height="1274" alt="automation-architecture" src="https://github.com/user-attachments/assets/547ce671-c34c-42d0-b30e-df2a0d81ccb3" />
