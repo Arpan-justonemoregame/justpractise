@@ -1,0 +1,41 @@
+This lesson demonstrates how to test Chainlink CCIP (Cross-Chain Interoperability Protocol) locally in Remix using Chainlink Local, instead of deploying to a live testnet. The goal is to simulate cross-chain messaging by sending a simple string message (e.g., “Hey there!”) between two smart contracts.
+
+Key points covered:
+
+Two smart contracts are used:
+
+MessageSender (source chain): Sends a CCIP message. The LINK token and Router addresses are passed dynamically via the constructor. It constructs an EVM2AnyMessage with an ABI-encoded string, no token transfers, and a specified gas limit for execution on the destination chain.
+
+MessageReceiver (destination chain): Inherits from CCIPReceiver and implements _ccipReceive to handle incoming messages. It decodes the message data, stores the message ID and text, and emits an event. A getter function allows retrieval of the last received message.
+
+Chainlink Local setup:
+
+A helper contract, CCIPLocalSimulator, is deployed on Remix VM (Cancun). It deploys mock CCIP infrastructure (routers, LINK token, chain selectors) required for local testing.
+
+The configuration function provides all necessary addresses (LINK token, source router, destination router, chain selector).
+
+Deployment workflow:
+
+Deploy CCIPLocalSimulator on Remix VM.
+
+Load the pre-deployed LINK token using the provided address.
+
+Deploy MessageSender with the source router and LINK token address.
+
+Deploy MessageReceiver with the destination router.
+
+Sending and verifying a message:
+
+Call sendMessage on MessageSender with the destination chain selector, receiver address, and message text.
+
+Manually set a gas limit (e.g., 3,000,000) due to Remix gas estimation limitations.
+
+Verify receipt by calling getLastReceivedMessageDetails on MessageReceiver.
+
+Outcome:
+
+Cross-chain messaging is simulated instantly without waiting for block finality.
+
+Developers can safely and quickly test CCIP logic locally before deploying to real networks.
+
+Overall, the lesson shows how Chainlink Local enables fast, reliable, and cost-free local testing of CCIP cross-chain messaging directly in Remix.
